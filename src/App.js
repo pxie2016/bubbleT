@@ -1,7 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
+import {Button,Navbar, Container, Nav, NavDropdown} from'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-
+import { Route, Switch } from 'react-router-dom';
+import NavBar from './features/component/Navbar';
+import HomePage from './features/component/HomePage';
 function App() {
     /* Axios.post("http://localhost:8000/shops/add",{
         name: "Timeless T.",
@@ -28,9 +32,8 @@ function App() {
 
     return (
         <div className="App">
-            <h1>bubbleT, a bubble tea review site</h1>
-            <div>
-            </div>
+
+            <HomePage/>
         </div>
     );
 }
