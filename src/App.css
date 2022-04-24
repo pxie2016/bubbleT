@@ -1,3 +1,35 @@
-.App {
-  text-align: center;
+.homepage,
+.loginpage,
+.entrypage,
+.create-entry-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.loginpage,
+.create-entry-page {
+  height: 100vh;
+
+}
+
+.rightside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.review-box {
+  background-color: aquamarine;
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px
 }
