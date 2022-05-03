@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-import HomePage from './features/component/HomePage';
+import HomePage from './features/homepage/HomePage';
 import LoginPage from './features/component/LoginPage';
 import SignUpPage from './features/component/SignUpPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
