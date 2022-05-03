@@ -1,10 +1,8 @@
 import React from 'react'
 import {Form, Card, Button} from'react-bootstrap';
-import NavBar from './Navbar';
 function CreateEntryPage() {
   return (
     <div>
-        <NavBar/>
         <div className='create-entry-page'>
             <Card style={{ width: '80vh' }}>
                 <Card.Header>Create a new post</Card.Header>

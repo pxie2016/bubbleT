@@ -13,7 +13,7 @@ function Entry(props) {
                 <Card.Text>
                 {props.content}
                 </Card.Text>
-                <Card.Link href='/entrypage'>detais</Card.Link>
+                <Card.Link href='/entrypage'>details</Card.Link>
             </Card.Body>
         </Card>
     </div>
