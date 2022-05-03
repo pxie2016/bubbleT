@@ -1,37 +1,39 @@
-import React from 'react';
-import Axios from 'axios';
+import React, { useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
+import {useDispatch} from "react-redux";
+import NavBar from './features/component/Navbar'
+import HomePage from './features/homepage/HomePage';
+import {setUser} from './features/user/userSlice'
+import LoginPage from './features/component/LoginPage';
+import SignUpPage from './features/component/SignUpPage';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import EntryPage from './features/entrypage/EntryPage';
+import CreateEntryPage from './features/component/CreateEntryPage';
 
 function App() {
-    /* Axios.post("http://localhost:8000/shops/add",{
-        name: "Timeless T.",
-        address: "14320 NE 20th St Unit D",
-        city: "Bellevue",
-        state: "WA",
-        zipcode: "98007",
-        stars: 4.6
-    }).then(res => {
-        console.log(res);
-    }) */
-
-    // TODO: This somehow needs to be extracted outside...?
-
-    async function getAllShops() {
-        const url = "http://localhost:8000/shops";
-        let response = await Axios.get(url);
-        return response.data;
-    }
-
-    console.log(getAllShops().then(result => {
-        return result;
-    }));
-
+    const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem("profile"))
+    useEffect(()=>{
+        dispatch(setUser(user))
+    },[])
     return (
+        <BrowserRouter>
         <div className="App">
-            <h1>bubbleT, a bubble tea review site</h1>
-            <div>
-            </div>
+        <NavBar/>
+          <Routes>
+              <Route path={"/"} element={<HomePage/>}/>
+              
+              <Route path={"/entrypage"} element={<EntryPage/>}/>
+              <Route path={"/createentrypage"} element={<CreateEntryPage/>}/>
+              <Route path={"/signuppage"} element={<SignUpPage/>}/>
+              <Route path={"/loginpage"} element={<LoginPage/>}/>
+
+          </Routes>
+  
+  
         </div>
+        </BrowserRouter>
     );
 }
 
