@@ -3,7 +3,7 @@ import React,{useState, useEffect} from 'react'
 import {Form,Button} from'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useSelector, useDispatch} from "react-redux";
-import {login} from "../user/userSlice"
+import {login} from "./userSlice"
 import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';

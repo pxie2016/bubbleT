@@ -1,4 +1,4 @@
-import Entry from '../component/Entry'
+import ShopCard from '../component/ShopCard'
 import {useSelector, useDispatch} from "react-redux";
 import {fetchAllShops, selectAllShops} from './homePageSlice'
 
@@ -36,14 +36,14 @@ function HomePage() {
         <div>
             <div className='homepage' onLoad={() => dispatch(fetchAllShops())}>
                 <div>
-                    {allShops.map((entry) => {
-                        return <Entry key={entry._id} title={entry.name}/>
+                    {allShops.map((shop) => {
+                        return <ShopCard key={shop._id} title={shop.name}/>
                     })}
                 </div>
-                {fakeEntry.map((entry) => {
-                    return <Entry key={entry.title} title={entry.title} date={entry.date} picture={entry.picture}
-                                  content={entry.content}
-                                  rating={entry.rating}/>;
+                {fakeEntry.map((shop) => {
+                    return <ShopCard key={shop.title} title={shop.title} date={shop.date} picture={shop.picture}
+                                  content={shop.content}
+                                  rating={shop.rating}/>;
                 })}
             </div>
         </div>
