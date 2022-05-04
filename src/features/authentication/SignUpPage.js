@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import {signup} from "../user/userSlice"
+import {signup} from "./userSlice"
 function SignUpPage() {
 
     const initialState = {

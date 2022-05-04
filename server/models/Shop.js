@@ -8,7 +8,19 @@ let Shop = new Schema({
     city: String,
     state: String,
     zipcode: String,
-    stars: {type: Number, min: 1., max: 5.}
+    creator:String,
+    imgFile:String,
+    description:String,
+    rating:String,
+    createdAt:{
+        type:Date,
+        default: new Date(),
+    },
+    stars: {type: Number, min: 1., max: 5.},
+    likeCount:{
+        type:Number,
+        default:0
+    }
 }, {collection: 'shops'})
 
 module.exports = mongoose.model('Shop', Shop);

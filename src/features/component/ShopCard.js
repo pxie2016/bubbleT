@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card} from'react-bootstrap';
 
-function Entry(props) {
+function ShopCard(props) {
   return (
     <div className='entry'>
         <Card style={{ width: '30rem' }}>
@@ -20,4 +20,4 @@ function Entry(props) {
   )
 }
 
-export default Entry
+export default ShopCard

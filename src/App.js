@@ -4,12 +4,12 @@ import './App.css';
 import {useDispatch} from "react-redux";
 import NavBar from './features/component/Navbar'
 import HomePage from './features/homepage/HomePage';
-import {setUser} from './features/user/userSlice'
-import LoginPage from './features/component/LoginPage';
-import SignUpPage from './features/component/SignUpPage';
+import {setUser} from './features/authentication/userSlice'
+import LoginPage from './features/authentication/LoginPage';
+import SignUpPage from './features/authentication/SignUpPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import EntryPage from './features/entrypage/EntryPage';
-import CreateEntryPage from './features/component/CreateEntryPage';
+import ShopPage from './features/shoppage/ShopPage';
+import CreateShopPage from './features/createshoppage/CreateShopPage';
 
 function App() {
     const dispatch = useDispatch();
@@ -24,8 +24,8 @@ function App() {
           <Routes>
               <Route path={"/"} element={<HomePage/>}/>
               
-              <Route path={"/entrypage"} element={<EntryPage/>}/>
-              <Route path={"/createentrypage"} element={<CreateEntryPage/>}/>
+              <Route path={"/entrypage"} element={<ShopPage/>}/>
+              <Route path={"/createentrypage"} element={<CreateShopPage/>}/>
               <Route path={"/signuppage"} element={<SignUpPage/>}/>
               <Route path={"/loginpage"} element={<LoginPage/>}/>
 

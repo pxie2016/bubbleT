@@ -25,6 +25,31 @@ ShopRoute.route('/').get(function (req, res) {
     });
 });
 
-// TODO: add delete route
+
+ShopRoute.route("/create").post(async(req, res)=> {
+    let shop = req.body
+    const newShop = new Shop({
+        ...shop,
+        createdAt: new Date().toISOString()
+    })
+    try{
+        await newShop.save()
+        res.status(201).json(newShop)
+    }catch(err){
+        res.status(404).json({message:"something went wrong when posting shop"})
+    }
+})
+
+ShopRoute.route("/get").get(async(req, res)=>{
+    try{
+        const shop = await Shop.find()
+
+        res.status(200).json(shop)
+    }catch(err){
+        res.status(404).json({message:"something went wrong when getting shop"})
+    }
+
+})
+
 
 module.exports = ShopRoute;

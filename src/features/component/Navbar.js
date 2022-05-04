@@ -2,7 +2,7 @@ import React  from 'react'
 import {Navbar, Container, Nav} from'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useSelector, useDispatch} from "react-redux";
-import {setLogout} from '../user/userSlice'
+import {setLogout} from '../authentication/userSlice'
 
 function NavBar() {
   const {user} = useSelector((state)=>({...state.user}))
