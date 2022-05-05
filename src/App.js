@@ -11,7 +11,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ShopPage from './features/shoppage/ShopPage';
 import CreateShopPage from './features/createshoppage/CreateShopPage';
 import {IndividualShopPage} from "./features/shoppage/IndividualShopPage";
-
+import DashBoard from './features/homepage/DashBoard';
 function App() {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"))
@@ -31,6 +31,7 @@ function App() {
                     <Route path={"/createshoppage"} element={<CreateShopPage/>}/>
                     <Route path={"/signuppage"} element={<SignUpPage/>}/>
                     <Route path={"/loginpage"} element={<LoginPage/>}/>
+                    <Route path={"/dashboard"} element={<DashBoard/>}/>
 
                 </Routes>
 

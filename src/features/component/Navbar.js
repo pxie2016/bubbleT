@@ -21,6 +21,7 @@ function NavBar() {
                 <>
                 <Nav.Link href="/" >Welcome! {user?.result?.username}</Nav.Link>
                 <Nav.Link href="/createshoppage">Create Post</Nav.Link>
+                <Nav.Link href="/dashboard">My Post</Nav.Link>
                 <Nav.Link href="/" onClick={()=>handleOnclick()}>Logout</Nav.Link>
                 </>
               ):(
