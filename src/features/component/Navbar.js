@@ -20,7 +20,7 @@ function NavBar() {
               {user?.result?._id?(
                 <>
                 <Nav.Link href="/" >Welcome! {user?.result?.username}</Nav.Link>
-                <Nav.Link href="/createentrypage">Create Post</Nav.Link>
+                <Nav.Link href="/createshoppage">Create Post</Nav.Link>
                 <Nav.Link href="/" onClick={()=>handleOnclick()}>Logout</Nav.Link>
                 </>
               ):(
