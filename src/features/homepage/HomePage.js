@@ -1,7 +1,7 @@
 import ShopCard from '../component/ShopCard'
 import {useSelector, useDispatch} from "react-redux";
-import {fetchAllShops, selectAllShops} from './homePageSlice'
-
+import {fetchAllShops, selectAllShops, getShopByUser} from './homePageSlice'
+import React, { useEffect } from 'react'
 function HomePage() {
 
     let fakeEntry = [
@@ -29,16 +29,17 @@ function HomePage() {
 
     let allShops = useSelector(selectAllShops);
     const dispatch = useDispatch();
-    console.log(allShops);
+    
 
     return (
         <div>
             <div className='homepage' onLoad={() => dispatch(fetchAllShops())}>
                 <div>
                     {allShops.map((shop) => {
-                        return <ShopCard key={shop._id} title={shop.name} date={shop.date}
+                        return <ShopCard key={shop._id} title={shop.name} date={shop.createdAt}
                                          description={shop.description}
-                                         rating={shop.rating} id={shop._id}/>
+                                         rating={shop.rating} id={shop._id}
+                                         creator={shop.creator}/>
                     })}
                 </div>
                 {fakeEntry.map((shop) => {

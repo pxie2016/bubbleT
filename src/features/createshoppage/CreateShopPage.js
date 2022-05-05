@@ -30,13 +30,8 @@ function CreateShopPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const{error} = useSelector((state)=>({...state.shop}))
     const{user} = useSelector((state)=>({...state.user}))
 
-
-    useEffect(()=>{
-        error&&toast.error(error)
-    },[error])
 
     function handleInput(e, name){
         
@@ -47,7 +42,6 @@ function CreateShopPage() {
     function handleSubmit(e){
         e.preventDefault();
         const shopData = {...shop, creator:user?.result?.username}
-        console.log(shopData)
         dispatch(createShop({shopData, navigate, toast}))
         setShop(initialState)
     }

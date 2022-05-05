@@ -9,6 +9,7 @@ let Shop = new Schema({
     state: String,
     zipcode: String,
     creator:String,
+    creatorId:String,
     imgFile:String,
     description:String,
     rating:String,
