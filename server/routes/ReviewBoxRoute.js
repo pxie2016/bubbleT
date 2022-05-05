@@ -5,22 +5,28 @@ const ReviewBoxRoute = express.Router();
 
 let ReviewBox = require('../models/ReviewBox');
 
-ReviewBoxRoute.route('/add').post(function (req, res) {
-    let reviewBox = new ReviewBox(req.body);
-    reviewBox.save()
-        .then(post => {
-            res.status(200).json(post);
-        })
-        .catch(err => {
-            res.status(400).send("Error in saving to database");
-        });
-});
+ReviewBoxRoute.route("/create").post(async (req, res) => {
+    let reviewBox = req.body
+    const newReviewBox = new ReviewBox({
+        ...reviewBox,
+        createdAt: new Date().toISOString()
+    })
+    try {
+        await newReviewBox.save()
+        res.status(201).json(newReviewBox)
+    } catch (err) {
+        res.status(404).json({message: "something went wrong when posting reviewBox"})
+    }
+})
 
-ReviewBoxRoute.route('/').get(function (req, res) {
-    ReviewBox.find(function (err, shop) {
-        if (err) console.log(err);
-        else res.json(shop);
-    });
-});
+ReviewBoxRoute.route("/get").get(async (req, res) => {
+    try {
+        const reviewBox = await ReviewBox.find()
+
+        res.status(200).json(reviewBox)
+    } catch (err) {
+        res.status(404).json({message: "something went wrong when getting reviewBox"})
+    }
+})
 
 module.exports = ReviewBoxRoute;

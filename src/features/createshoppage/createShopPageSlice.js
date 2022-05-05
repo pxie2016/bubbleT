@@ -17,8 +17,8 @@ export const createShop = createAsyncThunk(
     }
 )
 
-const createShopSlice = createSlice({
-    name:'shop',
+const createShopPageSlice = createSlice({
+    name:'createshoppage',
     initialState:{
         shop:{},
         error:"",
@@ -38,4 +38,4 @@ const createShopSlice = createSlice({
         },
     }
 });
-export default createShopSlice.reducer
+export default createShopPageSlice.reducer

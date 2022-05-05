@@ -1,7 +1,7 @@
 .homepage,
 .loginpage,
-.entrypage,
-.create-entry-page {
+.shoppage,
+.create-shop-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .loginpage,
-.create-entry-page {
+.create-shop-page {
   height: 100vh;
 
 }

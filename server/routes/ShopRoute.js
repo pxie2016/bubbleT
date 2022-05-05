@@ -1,30 +1,10 @@
 const express = require('express');
+const mongodb = require("mongodb");
 const app = express();
 
 const ShopRoute = express.Router();
 
 let Shop = require('../models/Shop');
-
-// These two API calls are working
-
-ShopRoute.route('/add').post(function (req, res) {
-    let shop = new Shop(req.body);
-    shop.save()
-        .then(post => {
-            res.status(200).json(post);
-        })
-        .catch(err => {
-            res.status(400).send("Error in saving to database");
-        });
-});
-
-ShopRoute.route('/').get(function (req, res) {
-    Shop.find(function (err, shop) {
-        if (err) console.log(err);
-        else res.json(shop);
-    });
-});
-
 
 ShopRoute.route("/create").post(async(req, res)=> {
     let shop = req.body
@@ -51,5 +31,14 @@ ShopRoute.route("/get").get(async(req, res)=>{
 
 })
 
+ShopRoute.route("/get/:id").get(async (req, res) => {
+    try {
+        const id = req.params.id;
+        const foundShop = await Shop.findOne({_id: id});
+        res.status(200).json(foundShop)
+    } catch (err) {
+        res.status(404).json({message:"this particular shop does not exist"})
+    }
+})
 
 module.exports = ShopRoute;

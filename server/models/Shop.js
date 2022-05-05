@@ -16,7 +16,6 @@ let Shop = new Schema({
         type:Date,
         default: new Date(),
     },
-    stars: {type: Number, min: 1., max: 5.},
     likeCount:{
         type:Number,
         default:0

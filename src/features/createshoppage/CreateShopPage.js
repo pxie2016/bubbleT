@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import {createShop} from './CreateShopSlice';
+import {createShop} from './createShopPageSlice';
 function CreateShopPage() {
     const initialState = {
         name: "",
@@ -24,7 +24,7 @@ function CreateShopPage() {
 
 
     const [shop, setShop] = useState(initialState)
-    const{name,address,city,state, zipcode,creator, imgFile,discriprion} = shop
+    const{name,address,city,state, zipcode,creator, imgFile, description} = shop
 
 
     const dispatch = useDispatch();
@@ -54,7 +54,7 @@ function CreateShopPage() {
 
   return (
     <div>
-        <div className='create-entry-page'>
+        <div className='create-shop-page'>
 
             <Form >
                 <Form.Group className="mb-3" onChange={e=>handleInput(e, "name")}>
@@ -82,7 +82,7 @@ function CreateShopPage() {
                     </Form.Group>
                 </Row>
 
-                <Form.Group className="mb-3" onChange={e=>handleInput(e, "discription")}>
+                <Form.Group className="mb-3" onChange={e=>handleInput(e, "description")}>
                     <Form.Label>Description</Form.Label>
                     <Form.Control as="textarea" placeholder="say something" rows={7} />
                 </Form.Group>
