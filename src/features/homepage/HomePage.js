@@ -10,6 +10,7 @@ function HomePage() {
 
     return (
         <div>
+            <h1>Bubble T, a bubble tea review site</h1>
             <div className='homepage' onLoad={() => dispatch(fetchAllShops())}>
                 {[...allShops].sort((a, b) => {
                     return new Date(b.createdAt) - new Date(a.createdAt)
