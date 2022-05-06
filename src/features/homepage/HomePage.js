@@ -1,17 +1,21 @@
 import ShopCard from '../component/ShopCard'
 import {useSelector, useDispatch} from "react-redux";
 import {fetchAllShops, selectAllShops} from './homePageSlice'
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function HomePage() {
 
     let allShops = useSelector(selectAllShops);
     const dispatch = useDispatch();
+    console.log(allShops);
+    useEffect(() => {
+        dispatch(fetchAllShops())
+    }, [])
 
     return (
         <div>
             <h1>Bubble T, a bubble tea review site</h1>
-            <div className='homepage' onLoad={() => dispatch(fetchAllShops())}>
+            <div className='homepage'>
                 {[...allShops].sort((a, b) => {
                     return new Date(b.createdAt) - new Date(a.createdAt)
                 }).map((shop) => {
