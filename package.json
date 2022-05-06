@@ -27,10 +27,12 @@
     "react-toastify": "^8.2.0"
   },
   "scripts": {
-    "start": "concurrently \"node server.js\" \"react-scripts start\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "npm run build",
+    "install-client": "npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "server": "nodemon server.js",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start \"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start \""
   },
   "eslintConfig": {
     "extends": "react-app"
