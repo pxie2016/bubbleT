@@ -21,7 +21,6 @@ export function IndividualShopPage() {
     }return (
         <div className="shoppage">
             <div>
-                The id of this store is {id}
                 <Card border="light" style={{width: '70%', height: '60vh'}}>
                     <Card.Body>
                         <h1>{allState.name}</h1>

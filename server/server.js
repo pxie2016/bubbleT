@@ -6,15 +6,9 @@ const mongoose = require('mongoose');
 const app = express();
 
 // mongoose.connect("mongodb://localhost:27017/admin")
-//     .then(
-//         () => {
-//             console.log("DB connected")
-//         },
-//         err => {
-//             console.log("DB error" + err)
-//         }
-//     );
-mongoose.connect("mongodb+srv://testuser:123abc@cluster0.p9mg3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+const mongoDBEndpoint = process.env.MONGODB_URI || "mongodb://localhost:27017/admin";
+mongoose.connect(mongoDBEndpoint)
     .then(
         () => {console.log("DB connected")},
         err => {console.log("DB error" + err)}

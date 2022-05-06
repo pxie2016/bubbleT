@@ -100,7 +100,6 @@ export const {
 } = homePageSlice.actions;
 
 // Selectors
-export const selectSignInState = (state) => state.homepage.userSignedIn;
 export const selectAllShops = (state) => state.homepage.allShops;
 
 export default homePageSlice.reducer;
