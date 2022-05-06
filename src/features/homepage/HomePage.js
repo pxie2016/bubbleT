@@ -29,13 +29,14 @@ function HomePage() {
 
     let allShops = useSelector(selectAllShops);
     const dispatch = useDispatch();
+    console.log(allShops);
     
 
     return (
         <div>
             <div className='homepage' onLoad={() => dispatch(fetchAllShops())}>
                 <div>
-                    {allShops.map((shop) => {
+                    {[...allShops].sort((a, b) => {return new Date(b.createdAt) - new Date(a.createdAt)}).map((shop) => {
                         return <ShopCard key={shop._id} title={shop.name} date={shop.createdAt}
                                          description={shop.description}
                                          rating={shop.rating} id={shop._id}

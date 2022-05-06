@@ -17,10 +17,7 @@ let Shop = new Schema({
         type:Date,
         default: new Date(),
     },
-    likeCount:{
-        type:Number,
-        default:0
-    }
+    allReviews: [Schema.Types.Mixed]
 }, {collection: 'shops'})
 
 module.exports = mongoose.model('Shop', Shop);

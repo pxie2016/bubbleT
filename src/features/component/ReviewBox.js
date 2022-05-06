@@ -6,7 +6,6 @@ function ReviewBox(props) {
     <div>
     <Card border="secondary" style={{width:'90vh'}}>
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
         <div className='rightside'>
         <Card.Subtitle className="mb-2 text-muted">{props.username}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">{props.date}</Card.Subtitle>
