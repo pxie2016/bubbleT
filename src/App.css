@@ -17,6 +17,10 @@
 
 }
 
+.title {
+  height: 500px
+}
+
 .rightside {
   display: flex;
   flex-direction: column;

@@ -24,6 +24,36 @@ export const getShopsByUser = createAsyncThunk(
     }
 )
 
+export const deleteShop = createAsyncThunk(
+    'dashboard/deleteShop',
+    async ({shopId, toast}, {rejectWithValue}) => {
+        try{
+            const response = await api.deleteShop(shopId);
+            
+            toast.success("shop delete successfully~~")
+            return response.data;
+
+        } catch(err){
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+export const updateShop = createAsyncThunk(
+    'dashboard/updateShop',
+    async ({shopId, updatedShop, toast, navigate}, {rejectWithValue}) => {
+        try{
+            const response = await api.updateShop(updatedShop, shopId);
+            
+            toast.success("shop update successfully~~")
+            navigate("/dashboard")
+            return response.data;
+
+        } catch(err){
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
 const initialState = {userSignedIn: false, allShops: [], userShops:[]};
 
 export const homePageSlice = createSlice({
@@ -44,6 +74,22 @@ export const homePageSlice = createSlice({
         })
         builder.addCase(getShopsByUser.fulfilled, (state, action) => {
             state.userShops = action.payload;
+        })
+        builder.addCase(deleteShop.fulfilled, (state, action) => {
+            console.log("action", action)
+            const {arg:{shopId}}=action.meta
+            if(shopId){
+                state.allShops = state.allShops.filter((item)=>item._id!==shopId)
+                state.userShops = state.userShops.filter((item)=>item._id!==shopId)
+            }
+        })
+        builder.addCase(updateShop.fulfilled, (state, action) => {
+            console.log("action", action)
+            const {arg:{shopId}}=action.meta
+            if(shopId){
+                state.allShops = state.allShops.map((item)=>item._id===shopId?action.payload:item)
+                state.userShops = state.userShops.map((item)=>item._id===shopId?action.payload:item)
+            }
         })
     },
 

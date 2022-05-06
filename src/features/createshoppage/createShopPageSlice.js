@@ -21,21 +21,11 @@ const createShopPageSlice = createSlice({
     name:'createshoppage',
     initialState:{
         shop:{},
-        error:"",
-        loading:false,
     },
-    extraReducers:{
-        [createShop.pending]:(state, action)=>{
-            state.loading = true
-        },
-        [createShop.fulfilled]:(state, action)=>{
-            state.loading = false
-            state.shops = [action.payload]
-        },
-        [createShop.rejected]:(state, action)=>{
-            state.loading = false
-            state.error=action.payload.message
-        },
+    extraReducers:(builder) => {
+        builder.addCase(createShop.fulfilled, (state, action) => {
+            state.shop = [action.payload]
+        })
     }
 });
 export default createShopPageSlice.reducer

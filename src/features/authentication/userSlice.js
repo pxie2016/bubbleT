@@ -46,6 +46,7 @@ const userSlice = createSlice({
         },
     },
     extraReducers:{
+        
         [login.pending]:(state, action)=>{
             state.loading = true
         },
