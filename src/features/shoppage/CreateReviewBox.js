@@ -20,12 +20,13 @@ function CreateReviewBox() {
     function handleInput(e, name) {
         const value = e.target.value
         setReviewBox({...reviewBox,[name]:value})
-    }
+    } 
 
     function handleSubmit(e){
         e.preventDefault();
+        const shopId = initialState.id
         const reviewBoxData = {...reviewBox, creator:user?.result?.username}
-        dispatch(createReviewBox({reviewBoxData, toast}))
+        dispatch(createReviewBox({reviewBoxData, shopId, toast}))
         setReviewBox(initialState)
     }
 

@@ -12,11 +12,11 @@ export const fetchShopInfoById = createAsyncThunk(
 )
 
 export const createReviewBox = createAsyncThunk(
-    'reviews/create',
-    async ({reviewBoxData, toast}, {rejectWithValue}) => {
+    'shops/createReviewBox',
+    async ({reviewBoxData,shopId, toast}, {rejectWithValue}) => {
         try {
             console.log(reviewBoxData);
-            const response = await api.createReviewBox(reviewBoxData);
+            const response = await api.createReviewBox(reviewBoxData,shopId);
             toast.success("review posted")
             return response.data;
 
@@ -28,7 +28,7 @@ export const createReviewBox = createAsyncThunk(
 
 const initialState = {
     id: "", name: "", address: "", city: "", state: "", zipcode: "",
-    creator: "", imgFile: "", description: "", rating: "", createdAt: "", allReviews: []
+    creator: "",  description: "", rating: "", createdAt: "", allReviews: []
 };
 
 export const individualShopPageSlice = createSlice({
