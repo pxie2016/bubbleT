@@ -24,6 +24,13 @@ app.use('/users', userroutes);
 
 let port = process.env.PORT || 8000;
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', function (req, res) {
+    console.log("received request");
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.listen(port, () => {
     console.log('Starting server on port' + port);
 });

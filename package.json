@@ -1,5 +1,6 @@
 {
   "name": "bubblet",
+  "proxy": "http://localhost:8000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "react-toastify": "^8.2.0"
   },
   "scripts": {
+    "devstart": "concurrently \"nodemon server/server.js\" \"react-scripts start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
