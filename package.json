@@ -27,10 +27,8 @@
     "react-toastify": "^8.2.0"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "build": "react-scripts server/build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "eslintConfig": {
     "extends": "react-app"
