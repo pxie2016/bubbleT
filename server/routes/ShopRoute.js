@@ -34,21 +34,7 @@ ShopRoute.route("/create").post(async (req, res, next)=>{
     }
 })
 
-ShopRoute.route("/postReview/:id").post(async(req, res)=> {
-    const {id} = req.params;
-    const review = req.body;
-    try{
-        const foundShop = await Shop.findById(id);
-        const updatedShop = {
-           ...foundShop,
-            allReviews: review
-        }
-        await Shop.findByIdAndUpdate(id, updatedShop,{new:true})
-        res.json(updatedShop)
-    }catch(err){
-        res.status(404).json({message:"something went wrong when posting review" + err})
-    }
-})
+
 
 ShopRoute.route("/get").get(async(req, res)=>{
     try{
@@ -121,6 +107,32 @@ ShopRoute.route("/get/:id").delete(async (req, res, next)=>{
     }
 
 })
+
+
+
+ShopRoute.route("/get/:id/updateReview").patch(async(req, res)=> {
+    const {id} = req.params;
+    const {content, creator} = req.body;
+    try{
+        const foundShop = await Shop.findById(id);
+        const newReview = {
+            creator:creator,
+            content:content,
+            createdAt: new Date().toISOString()
+        }
+        const allReviews = foundShop.allReviews.push(newReview)
+        const updatedShop = {
+           ...foundShop,
+            allReviews: allReviews
+        }
+        await Shop.findByIdAndUpdate(id, updatedShop,{new:true})
+        res.json(updatedShop)
+    }catch(err){
+        res.status(404).json({message:"something went wrong when posting review" + err})
+    }
+})
+
+
 ShopRoute.route("/get/:id").patch(async (req, res, next)=>{
     try{
         const token = req.headers.authorization.split(" ")[1]
@@ -136,7 +148,7 @@ ShopRoute.route("/get/:id").patch(async (req, res, next)=>{
     }
 },async(req, res)=>{
     const {id} = req.params
-    const{name,address,city,zipcode,state,description, creator, imgFile,rating} = req.body
+    const{name,address,city,zipcode,state,description, creator, rating} = req.body
     try{
         if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(404).json({message:"shop does not exist"})
@@ -146,7 +158,6 @@ ShopRoute.route("/get/:id").patch(async (req, res, next)=>{
             name,
             description,
             rating,
-            imgFile,
             address,city,zipcode,state,
             _id:id,
             

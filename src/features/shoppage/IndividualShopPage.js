@@ -14,12 +14,15 @@ export function IndividualShopPage() {
         dispatch(fetchShopInfoById(id));
     }
     console.log(allState);
-
-    return (
+    const {user} = useSelector((state)=>({...state.user}))
+    let createReviewBox = ""
+    if (user){
+    createReviewBox = <div className='create-review'><CreateReviewBox/></div>
+    }return (
         <div className="shoppage">
             <div>
                 The id of this store is {id}
-                <Card border="light" style={{width: '70%', height: '80vh'}}>
+                <Card border="light" style={{width: '70%', height: '60vh'}}>
                     <Card.Body>
                         <h1>{allState.name}</h1>
                         <div className='rightside'>
@@ -27,29 +30,22 @@ export function IndividualShopPage() {
                             <Card.Subtitle
                                 className="mb-2 text-muted">{allState.createdAt.substring(0, 10)}</Card.Subtitle>
                             <Card.Subtitle className="mb-2">Rating: {allState.rating}/100</Card.Subtitle>
+                            <Card.Subtitle className="mb-2">Address: {allState.address}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2">City: {allState.city}, State: {allState.state}, Zipcode: {allState.zipcode}</Card.Subtitle>
                             <br></br>
                         </div>
                         <Card.Text>
                             <br></br>
-                            Tada! {allState.description}
+                             {allState.description}
                         </Card.Text>
                     </Card.Body>
                 </Card>
                 <div className='review-container'>
-                    <ReviewBox title="not so good" username="user123" content="i dont like this place!!"
-                               date="05/03/2022"/>
-                    <ReviewBox title="not so good" username="user123" content="i dont like this place!!"
-                               date="05/03/2022"/>
-                    <ReviewBox title="not so good" username="user123" content="i dont like this place!!"
-                               date="05/03/2022"/>
 
                     {allState.allReviews.map((review, idx) => {
-                        return <ReviewBox key={review.id + String(idx)} username={review.creator} content={review.content}/>
+                        return <ReviewBox key={review.id + String(idx)} username={review.creator} content={review.content} date={review.createdAt}/>
                     })}
-
-                    <div className='create-review'>
-                        <CreateReviewBox/>
-                    </div>
+                    {createReviewBox}
                 </div>
             </div>
         </div>

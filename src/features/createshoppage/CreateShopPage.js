@@ -14,19 +14,13 @@ function CreateShopPage() {
         state: "",
         zipcode: "",
         creator:"",
-        imgFile:"",
         description:"",
         rating:""
-        // stars: {type: Number, min: 1., max: 5.},
-        // likeCount:{
-        //     type:Number,
-        //     default:0
-        // }
     }
 
 
     const [shop, setShop] = useState(initialState)
-    const{name,address,city,state, zipcode,creator, imgFile, description, rating} = shop
+    const{name,address,city,state, zipcode,creator, description, rating} = shop
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -46,6 +40,7 @@ function CreateShopPage() {
         if(id){
             const currentShop = userShops.find((ashop)=> ashop._id ===id)
             setShop({...currentShop})
+            console.log(rating)
         }
     }, [id,userShops])
     
@@ -112,13 +107,8 @@ function CreateShopPage() {
                     </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" onChange={e=>handleInput(e, "rating")}>
-                    <Form.Range style={{ width: '30%' }} defaultValue={rating}/>
-                </Form.Group>
-                
-                <Form.Group className="mb-3">
-                    <Form.Label>Upload a picture?</Form.Label>
-                    <Form.Control type="file" />
+                <Form.Group className="mb-3" >
+                    <Form.Range style={{ width: '30%' }} onChange={e=>handleInput(e, "rating")} defaultValue={rating}/>
                 </Form.Group>
 
                 <Button variant="primary" type="submit" onClick={e=>handleSubmit(e)}>{id?"Update":"Submit"}</Button>
