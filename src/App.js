@@ -12,6 +12,7 @@ import ShopPage from './features/shoppage/ShopPage';
 import CreateShopPage from './features/createshoppage/CreateShopPage';
 import {IndividualShopPage} from "./features/shoppage/IndividualShopPage";
 import DashBoard from './features/homepage/DashBoard';
+import PrivateRoute from './features/component/PrivateRoute';
 function App() {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"))
@@ -28,10 +29,13 @@ function App() {
                     <Route path={"/shoppage"} element={<ShopPage/>}>
                         <Route path={":id"} element={<IndividualShopPage/>}/>
                     </Route>
-                    <Route path={"/createshoppage"} element={<CreateShopPage/>}/>
+                    
+                    <Route path={"/createshoppage"} element={<PrivateRoute><CreateShopPage/></PrivateRoute>}/>
+                    <Route path={"/editShop/:id"} element={<PrivateRoute><CreateShopPage/></PrivateRoute>}/>
                     <Route path={"/signuppage"} element={<SignUpPage/>}/>
                     <Route path={"/loginpage"} element={<LoginPage/>}/>
-                    <Route path={"/dashboard"} element={<DashBoard/>}/>
+                    
+                    <Route path={"/dashboard"} element={<PrivateRoute><DashBoard/></PrivateRoute>}/>
 
                 </Routes>
 

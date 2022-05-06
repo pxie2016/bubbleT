@@ -12,7 +12,7 @@ function NavBar() {
   }
   return (
     <div>  
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" >
             <Container>
               <Navbar.Brand href="/">Bubble T</Navbar.Brand>
               <Nav className="me-auto">

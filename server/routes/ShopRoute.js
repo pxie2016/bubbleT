@@ -44,7 +44,6 @@ ShopRoute.route("/get").get(async(req, res)=>{
     }catch(err){
         res.status(404).json({message:"something went wrong when getting shop"})
     }
-
 })
 
 
@@ -79,6 +78,72 @@ ShopRoute.route("/get/userShops/:id").get(async (req, res, next)=>{
     const userShops = await Shop.find({creatorId:id})
     res.status(200).json(userShops)
     
+})
+
+ShopRoute.route("/get/:id").delete(async (req, res, next)=>{
+    try{
+        const token = req.headers.authorization.split(" ")[1]
+        const isCustomUser = token.length<500
+        let decodedData
+        if(token&& isCustomUser){
+            decodedData = jwt.verify(token, secret)
+            req.userId = decodedData?.id
+        }
+        next()
+    } catch(err){
+        console.log(err)
+    }
+}, async(req, res)=>{
+    const {id} = req.params
+    try{
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({message:"shop does not exist"})
+        }
+        await Shop.findByIdAndRemove(id)
+        res.json({message:"shop deleted successfully"})
+        
+    }catch(err){
+        res.status(404).json({message:"something went wrong when deleting shop"})
+    }
+
+})
+ShopRoute.route("/get/:id").patch(async (req, res, next)=>{
+    try{
+        const token = req.headers.authorization.split(" ")[1]
+        const isCustomUser = token.length<500
+        let decodedData
+        if(token&& isCustomUser){
+            decodedData = jwt.verify(token, secret)
+            req.userId = decodedData?.id
+        }
+        next()
+    } catch(err){
+        console.log(err)
+    }
+},async(req, res)=>{
+    const {id} = req.params
+    const{name,address,city,zipcode,state,description, creator, imgFile,rating} = req.body
+    try{
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({message:"shop does not exist"})
+        }
+        const updatedShop = {
+            creator,
+            name,
+            description,
+            rating,
+            imgFile,
+            address,city,zipcode,state,
+            _id:id,
+            
+        }
+        await Shop.findByIdAndUpdate(id, updatedShop,{new:true})
+        res.json(updatedShop)
+        
+    }catch(err){
+        res.status(404).json({message:"something went wrong when updating shop"})
+    }
+
 })
 
 module.exports = ShopRoute;
