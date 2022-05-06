@@ -10,6 +10,6 @@ export const store = configureStore({
     homepage: homePageReducer,
     user: userReducer,
     individualshoppage: individualShopPageReducer,
-    createshoppage: createShopPageReducer
+    createshoppage: createShopPageReducer,
   }
 });

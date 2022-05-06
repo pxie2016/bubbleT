@@ -1,23 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-
-export const fetchAllReviews = createAsyncThunk(
-    'shopPage/fetchAllReviews',
-    async () => {
-        const url = "http://localhost:8000/ReviewBox";
-        const response = await axios.get(url);
-        return response.data;
-    }
-)
-
-export const postReview = createAsyncThunk(
-    'shopPage/postReview',
-    async () => {
-        const url = "http://localhost:8000/ReviewBox";
-        const response = await axios.post(url);
-        return response.data;
-    }
-)
+import * as api from "../../app/api";
 
 export const fetchShopInfoById = createAsyncThunk(
     'shops/fetchShopInfoByIdStatus',
@@ -28,8 +11,25 @@ export const fetchShopInfoById = createAsyncThunk(
     }
 )
 
-const initialState = {id: "", name: "", address: "", city: "", state: "", zipcode: "",
-    creator: "", imgFile: "", description: "", rating: "", createdAt: "", likeCount: 0, allReviews: []};
+export const createReviewBox = createAsyncThunk(
+    'reviews/create',
+    async ({reviewBoxData, toast}, {rejectWithValue}) => {
+        try {
+            console.log(reviewBoxData);
+            const response = await api.createReviewBox(reviewBoxData);
+            toast.success("review posted")
+            return response.data;
+
+        } catch (err) {
+            return rejectWithValue(err.response.data)
+        }
+    })
+
+
+const initialState = {
+    id: "", name: "", address: "", city: "", state: "", zipcode: "",
+    creator: "", imgFile: "", description: "", rating: "", createdAt: "", allReviews: []
+};
 
 export const individualShopPageSlice = createSlice({
     name: 'individualshoppage',
@@ -50,9 +50,12 @@ export const individualShopPageSlice = createSlice({
             state.creator = action.payload.creator;
             state.createdAt = action.payload.createdAt;
             state.description = action.payload.description;
-            state.likeCount = action.payload.likeCount;
             state.rating = action.payload.rating;
+            state.allReviews = action.payload.allReviews;
         });
+        builder.addCase(createReviewBox.fulfilled, (state, action) => {
+            state.allReviews = [...state.allReviews, action.meta.arg.reviewBoxData]
+        })
     }
 });
 
@@ -63,6 +66,5 @@ export const {
 // Selectors
 export const selectAllState = (state) => state.individualshoppage;
 export const selectShopId = (state) => state.individualshoppage.id;
-export const selectAllReviews = (state) => state.individualshoppage.allReviews;
 
 export default individualShopPageSlice.reducer;

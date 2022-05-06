@@ -1,6 +1,4 @@
-
 const express = require('express');
-const mongodb = require("mongodb");
 const app = express();
 const jwt=require('jsonwebtoken') 
 const ShopRoute = express.Router();
@@ -33,6 +31,22 @@ ShopRoute.route("/create").post(async (req, res, next)=>{
         res.status(201).json(newShop)
     }catch(err){
         res.status(404).json({message:"something went wrong when posting shop"})
+    }
+})
+
+ShopRoute.route("/postReview/:id").post(async(req, res)=> {
+    const {id} = req.params;
+    const review = req.body;
+    try{
+        const foundShop = await Shop.findById(id);
+        const updatedShop = {
+           ...foundShop,
+            allReviews: review
+        }
+        await Shop.findByIdAndUpdate(id, updatedShop,{new:true})
+        res.json(updatedShop)
+    }catch(err){
+        res.status(404).json({message:"something went wrong when posting review" + err})
     }
 })
 
