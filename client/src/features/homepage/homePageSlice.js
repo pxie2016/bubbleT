@@ -5,7 +5,7 @@ import * as api from '../../app/api'
 export const fetchAllShops = createAsyncThunk(
     'homepage/fetchAllShopsStatus',
     async (thunkAPI) => {
-        const url = "http://localhost:8000/shops/get";
+        const url = "/shops/get";
         const response = await axios.get(url);
         return response.data;
     }
