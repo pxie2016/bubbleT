@@ -5,7 +5,7 @@ import * as api from "../../app/api";
 export const fetchShopInfoById = createAsyncThunk(
     'shops/fetchShopInfoByIdStatus',
     async (id) => {
-        const url = "http://localhost:8000/shops/get/" + id;
+        const url = "/shops/get/" + id;
         const response = await axios.get(url);
         return response.data;
     }
