@@ -30,9 +30,6 @@
     "start": "nodemon server.js",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
